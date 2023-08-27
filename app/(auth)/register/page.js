@@ -1,13 +1,14 @@
 "use client";
-import handleAuthForm from "@/app/_hook/handleAuthForm";
+import useAuthForm from "@/app/_hook/useAuthForm";
 import GuestLayout from "@/app/_layout/GuestLayout";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const Register = () => {
-  let token = localStorage.getItem("token") || null;
-  let { formData, submitRegister, onChange } = handleAuthForm();
+  let token = Cookies.get("token") || null;
+  let { formData, submitRegister, onChange } = useAuthForm();
   let router = useRouter();
   useEffect(() => {
     if (token) {

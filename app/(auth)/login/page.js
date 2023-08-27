@@ -1,14 +1,15 @@
 "use client";
 import Label from "@/app/_components/UI/Label";
-import handleAuthForm from "@/app/_hook/handleAuthForm";
+import useAuthForm from "@/app/_hook/useAuthForm";
 import GuestLayout from "@/app/_layout/GuestLayout";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const Login = () => {
-  let token = localStorage.getItem("token") || null;
-  let { formData, submitLogin, onChange } = handleAuthForm();
+  let token = Cookies.get("token") || null;
+  let { formData, submitLogin, onChange } = useAuthForm();
   let router = useRouter();
   useEffect(() => {
     if (token) {
@@ -83,7 +84,7 @@ const Login = () => {
           </form>
           <div className="text-center my-3">
             <span>
-              Don't have account create?{" "}
+              Don&apos;t have account create?{" "}
               <Link
                 className="inline-block align-baseline font-bold text-sm text-primary hover:text-secondary"
                 href="/register"

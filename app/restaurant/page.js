@@ -10,7 +10,7 @@ import Search from "../_components/Template/Search";
 import useFetchQuery from "../_hook/useFetchQuery";
 import NothingFound from "../_components/molecule/NothingFound";
 
-const page = () => {
+const Restaurant = () => {
   let { data, isError, isLoading } = useFetchQuery(
     "allRestaurants",
     "restaurants"
@@ -44,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Restaurant;

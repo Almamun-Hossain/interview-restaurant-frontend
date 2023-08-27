@@ -109,7 +109,7 @@ const Profile = () => {
                   className="text-white bg-gray px-5 py-2 rounded-md"
                   disabled={true}
                 >
-                  Can't update password for this Users
+                  Can&apos;t update password for this Users
                 </button>
               ) : (
                 <button

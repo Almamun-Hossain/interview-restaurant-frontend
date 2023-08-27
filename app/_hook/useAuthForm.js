@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-const handleAuthForm = () => {
+const useAuthForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,4 +43,4 @@ const handleAuthForm = () => {
   return { formData, setFormData, onChange, submitLogin, submitRegister };
 };
 
-export default handleAuthForm;
+export default useAuthForm;

@@ -3,7 +3,7 @@ import AppLayout from "@/app/_layout/AppLayout";
 import { UserContext } from "@/app/_utils/UserProvider";
 import { useContext } from "react";
 
-const page = () => {
+const Dashboard = () => {
   let { user } = useContext(UserContext);
   return (
     <AppLayout>
@@ -12,4 +12,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Dashboard;

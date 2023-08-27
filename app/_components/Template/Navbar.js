@@ -10,9 +10,10 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import UserNavlist from "../molecule/UserNavlist";
 import AdminNavlist from "../molecule/AdminNavlist";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
-  let token = localStorage.getItem("token");
+  let token = Cookies.get("token");
   let { user, setUser } = useContext(UserContext);
   let { logout } = useAuth();
   const router = useRouter();
