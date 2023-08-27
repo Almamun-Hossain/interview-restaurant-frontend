@@ -15,7 +15,7 @@ const useSearch = () => {
 
   const [formData, setFormData] = useState(searchData);
 
-  let apiUrl = processSearchURL(formData) || "/search";
+  let apiUrl = processSearchURL(formData) || "search";
 
   let [url, setUrl] = useState(apiUrl);
 
@@ -28,7 +28,7 @@ const useSearch = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let updateURL = processSearchURL(formData) || "/search";
+    let updateURL = processSearchURL(formData) || "search";
     setUrl(updateURL);
     router.replace(apiUrl);
   };
