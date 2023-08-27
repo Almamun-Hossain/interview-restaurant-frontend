@@ -8,9 +8,10 @@ import Cookies from "js-cookie";
 const ProtectedRoute = ({ children }) => {
   let { user, setUser } = useContext(UserContext);
   let router = useRouter();
-  let { data } = useFetchQuery("user-data", "/user/me");
+  let { data } = useFetchQuery("user-data", "user/me");
   let token = Cookies.get("token") || null;
-
+  console.log(data);
+  console.log(token);
   useEffect(() => {
     if (!token && !user) {
       router.push("/login");
