@@ -9,11 +9,10 @@ const ProtectedRoute = ({ children }) => {
   let { user, setUser } = useContext(UserContext);
   let router = useRouter();
   let { data } = useFetchQuery("user-data", "user/me");
-  let token = Cookies.get("token") || null;
-  console.log(data);
-  console.log(token);
+
   useEffect(() => {
-    if (!token && !user) {
+    let token = localStorage.getItem("token");
+    if (!token) {
       router.push("/login");
     }
     if (!user && data) {

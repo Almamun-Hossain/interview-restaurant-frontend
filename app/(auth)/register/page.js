@@ -7,14 +7,14 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const Register = () => {
-  let token = Cookies.get("token") || null;
   let { formData, submitRegister, onChange } = useAuthForm();
   let router = useRouter();
   useEffect(() => {
+    let token = localStorage.getItem("token");
     if (token) {
       router.push("/dashboard");
     }
-  }, [token]);
+  }, []);
 
   return (
     <GuestLayout>

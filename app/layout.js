@@ -9,9 +9,10 @@ export default function RootLayout({ children }) {
         <title>Curry Leaves</title>
         <meta name="description" content="Explore delicious foods" />
       </Head>
-      <Providers>
-        <body className="bg-gray-300">{children}</body>
-      </Providers>
+
+        <Providers>
+          <body className="bg-gray-300">{children}</body>
+        </Providers>
     </html>
   );
 }

@@ -21,7 +21,7 @@ const useAuth = () => {
       });
       // Set the user data in the global context
       localStorage.setItem("token", data.token);
-      Cookies.set("token", data.token);
+      Cookies.set("token", data.token, { expires: 7, path: "/" });
       setUser(data.user);
       return data;
     } catch (error) {
@@ -34,13 +34,13 @@ const useAuth = () => {
     try {
       const { data } = await Axios.post(`/user/login`, { email, password });
       // Set the user data in the global context
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token, { expires: 7, path: "/" });
       Cookies.set("token", data.token);
       setUser(data.user);
       return data;
     } catch (error) {
       toast(error.response.data.message);
-      throw new Error("Failed to register");
+      // throw new Error("Failed to register");
     }
   });
 
