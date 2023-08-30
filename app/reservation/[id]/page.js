@@ -15,7 +15,7 @@ const ReservationForm = () => {
   if (!params.id) reutrn;
   let { data, isLoading } = useFetchQuery(
     "restaurant-data",
-    `/restaurant/${params.id}`
+    `restaurant/${params.id}`
   );
   const router = useRouter();
 
