@@ -6,7 +6,8 @@ import { deleteCookie } from "cookies-next";
 // Import and create your global context (UserContext) here
 // You can create a UserProvider that wraps your App component
 
-const useAuth = () => {// Adjust to your context name
+const useAuth = () => {
+  // Adjust to your context name
   // Registration Mutation
   const registratioMutation = useMutation(async ({ name, email, password }) => {
     try {
@@ -46,7 +47,7 @@ const useAuth = () => {// Adjust to your context name
         Axios.post("http://localhost:4000/api/v1/user/logout").then(
           ({ data }) => {
             if (data) {
-              deleteCookie("token");
+              deleteCookie("authToken");
               toast.success(data.message);
               // cookies.remove("token");
             }
