@@ -24,8 +24,6 @@ const Profile = () => {
   let onSubmit = async (e) => {
     e.preventDefault();
     try {
-      // alert(JSON.stringify(formData));
-      // return;
       let { data } = await Axios.put("/user/password/update", formData);
       if (data) {
         toast(data.message);
