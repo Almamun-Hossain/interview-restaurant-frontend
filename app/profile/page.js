@@ -6,9 +6,10 @@ import Input from "../_components/UI/Input";
 import useAuth from "../_hook/useAuth";
 import { toast } from "react-toastify";
 import Axios from "../_utils/Axios";
+import { useSession } from "next-auth/react";
 
 const Profile = () => {
-  let { user } = useContext(UserContext);
+  const { data: session } = useSession();
   let [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -44,8 +45,8 @@ const Profile = () => {
     <AppLayout>
       <div className="w-1/2 mx-auto my-10 bg-white shadow-lg p-10">
         <div className="text-center">
-          <h3>Welcome, {user?.name}</h3>
-          <span className="text-xl text-secondary">{user?.email}</span>
+          <h3>Welcome, {session?.user?.name}</h3>
+          <span className="text-xl text-secondary">{session?.user?.email}</span>
         </div>
 
         <div className="my-5">
@@ -102,8 +103,9 @@ const Profile = () => {
               />
             </div>
             <div className="text-center">
-              {user?.email === "almamun@mail.com" ||
-              user?.email === "almamun-admin@mail.com" ? (
+              {session &&
+              (session.user?.email === "almamun@mail.com" ||
+                session.user?.email === "almamun-admin@mail.com") ? (
                 <button
                   type="button"
                   className="text-white bg-gray px-5 py-2 rounded-md"

@@ -2,11 +2,10 @@
 import Label from "@/app/_components/UI/Label";
 import useAuthForm from "@/app/_hook/useAuthForm";
 import GuestLayout from "@/app/_layout/GuestLayout";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Login = () => {
   let { data: session } = useSession();
@@ -14,7 +13,6 @@ const Login = () => {
   let router = useRouter();
 
   useEffect(() => {
-    console.log(session);
     if (session) {
       router.push("/dashboard");
     }

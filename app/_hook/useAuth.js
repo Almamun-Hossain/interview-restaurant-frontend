@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { UserContext } from "../_utils/UserProvider";
 import { toast } from "react-toastify";
-// import Cookies from "js-cookie";
 import { Cookies } from "react-cookie";
 import Axios from "../_utils/Axios";
 import { signIn, signOut } from "next-auth/react";
@@ -40,6 +39,7 @@ const useAuth = () => {
       redirect: false,
     }).then((data) => {
       console.log("i am then function");
+      console.log(data);
       if (data) {
         if (data.error && data.ok) {
           toast.error(data.error);
