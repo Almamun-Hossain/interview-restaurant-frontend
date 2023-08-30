@@ -6,6 +6,7 @@ import Loading from "../_components/UI/Loading";
 import { Table } from "../_components/Template/Table";
 import { toast } from "react-toastify";
 import Axios from "../_utils/Axios";
+import NothingFound from "../_components/molecule/NothingFound";
 
 const Order = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,13 +37,17 @@ const Order = () => {
 
   return (
     <AppLayout>
-      <Table
-        title={"Recent Reservations"}
-        data={filteredReservations}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        onCancel={onCancel}
-      />
+      {filteredReservations ? (
+        <Table
+          title={"Recent Reservations"}
+          data={filteredReservations}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          onCancel={onCancel}
+        />
+      ) : (
+        <NothingFound />
+      )}
     </AppLayout>
   );
 };
