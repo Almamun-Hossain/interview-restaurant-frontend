@@ -10,7 +10,8 @@ const Providers = ({ children }) => {
     <SessionProvider>
       <QueryClientProvider client={client}>
         <UserProvider>
-          <AppCookiesProvider>{children}</AppCookiesProvider>
+          {/* <AppCookiesProvider>{children}</AppCookiesProvider> */}
+          {children}
         </UserProvider>
       </QueryClientProvider>
     </SessionProvider>

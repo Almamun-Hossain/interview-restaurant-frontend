@@ -12,6 +12,7 @@ const AppCookiesProvider = ({ children }) => {
         path: "/",
         sameSite: "none",
         secure: true,
+        httpOnly: true,
       });
     }
   }
