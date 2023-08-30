@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useAuth from "./useAuth";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 
 const useAuthForm = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +35,7 @@ const useAuthForm = () => {
     let data = await register(formData);
     if (data) {
       setFormData({ ...formData, name: "", email: "", password: "" });
-      router.back();
+      router.push("/login");
     }
   };
 

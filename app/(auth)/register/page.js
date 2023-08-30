@@ -11,7 +11,6 @@ const Register = () => {
   let { formData, submitRegister, onChange } = useAuthForm();
   let router = useRouter();
   useEffect(() => {
-    console.log(session);
     if (session) {
       router.push("/dashboard");
     }

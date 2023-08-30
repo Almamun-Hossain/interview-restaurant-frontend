@@ -1,16 +1,12 @@
 "use client";
-import { useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Logo } from "@/public/image";
 import Container from "../UI/Container";
-import { UserContext } from "@/app/_utils/UserProvider";
 import useAuth from "@/app/_hook/useAuth";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import UserNavlist from "../molecule/UserNavlist";
 import AdminNavlist from "../molecule/AdminNavlist";
-import Cookies from "js-cookie";
 import { useSession } from "next-auth/react";
 
 const Navbar = () => {

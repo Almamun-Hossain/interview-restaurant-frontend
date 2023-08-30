@@ -3,9 +3,7 @@ import Axios from "../_utils/Axios";
 
 const useFetchQuery = (key, path) => {
   async function fetchData() {
-    const { data } = await Axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${path}`
-    );
+    const { data } = await Axios.get(`/${path}`);
     if (!data) {
       throw new Error("Network response was not ok");
     }

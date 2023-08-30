@@ -1,11 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
-
+import { getCookie } from "cookies-next";
+axios.defaults.withCredentials = true;
 const Axios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   headers: {
-    Authorization: `Bearer ${Cookies.get("token")}`,
+    Authorization: `Bearer ${getCookie("authToken")}`,
   },
 });
 

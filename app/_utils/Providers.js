@@ -1,6 +1,5 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { UserProvider } from "./UserProvider";
 import { SessionProvider } from "next-auth/react";
 import AppCookiesProvider from "./AppCookiesProvider";
 
@@ -9,10 +8,7 @@ const Providers = ({ children }) => {
   return (
     <SessionProvider>
       <QueryClientProvider client={client}>
-        <UserProvider>
-          {/* <AppCookiesProvider>{children}</AppCookiesProvider> */}
-          {children}
-        </UserProvider>
+        <AppCookiesProvider>{children}</AppCookiesProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

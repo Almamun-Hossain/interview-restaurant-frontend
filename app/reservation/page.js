@@ -8,9 +8,8 @@ import { toast } from "react-toastify";
 import Axios from "../_utils/Axios";
 import NothingFound from "../_components/molecule/NothingFound";
 
-const Order = () => {
+const Reservation = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
   let { data, refetch, isLoading } = useFetchQuery(
     "reservation",
     "reservations"
@@ -37,6 +36,7 @@ const Order = () => {
 
   return (
     <AppLayout>
+      <h1>Getting data</h1>
       {filteredReservations ? (
         <Table
           title={"Recent Reservations"}
@@ -52,4 +52,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default Reservation;

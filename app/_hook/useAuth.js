@@ -1,18 +1,12 @@
-import { useContext, useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { UserContext } from "../_utils/UserProvider";
+import { useMutation } from "react-query";
 import { toast } from "react-toastify";
-import { Cookies } from "react-cookie";
 import Axios from "../_utils/Axios";
 import { signIn, signOut } from "next-auth/react";
-
+import { deleteCookie } from "cookies-next";
 // Import and create your global context (UserContext) here
 // You can create a UserProvider that wraps your App component
 
-const useAuth = () => {
-  let cookies = new Cookies();
-  const { user, setUser } = useContext(UserContext); // Adjust to your context name
-
+const useAuth = () => {// Adjust to your context name
   // Registration Mutation
   const registratioMutation = useMutation(async ({ name, email, password }) => {
     try {
@@ -22,9 +16,6 @@ const useAuth = () => {
         password,
       });
       // Set the user data in the global context
-      localStorage.setItem("token", data.token);
-      cookies.set("token", data.token);
-      setUser(data.user);
       return data;
     } catch (error) {
       toast(error.response.data.message);
@@ -55,19 +46,13 @@ const useAuth = () => {
         Axios.post("http://localhost:4000/api/v1/user/logout").then(
           ({ data }) => {
             if (data) {
+              deleteCookie("token");
               toast.success(data.message);
-              cookies.remove("token");
+              // cookies.remove("token");
             }
           }
         );
       });
-
-      // let { data } = await Axios.post(`/user/logout`);
-      // // Clear the user data in the global context
-      // setUser(null);
-      // localStorage.removeItem("token");
-      // Cookies.remove("token");
-      // return data;
     } catch (error) {
       console.log(error);
       toast(error.response.data.message);

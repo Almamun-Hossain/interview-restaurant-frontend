@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import { cookies } from "next/headers";
 import CredentialsProvider from "next-auth/providers/credentials";
 const handler = NextAuth({
   providers: [
@@ -29,12 +28,6 @@ const handler = NextAuth({
         );
         const data = await res.json();
         if (res.ok && data.success) {
-          cookies().set("token", data.token, {
-            httpOnly: true,
-            path: "/",
-            secure: true,
-            sameSite: "none",
-          });
           return { ...data.user, accessToken: data.token };
         } else {
           console.log(data);
