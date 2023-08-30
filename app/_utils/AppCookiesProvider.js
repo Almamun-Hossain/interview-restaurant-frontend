@@ -9,7 +9,6 @@ const AppCookiesProvider = ({ children }) => {
   if (session && session.user) {
     if (!cookies.token) {
       setCookies("token", session.user.token, {
-        httpOnly: true,
         path: "/",
         sameSite: "none",
         secure: true,
