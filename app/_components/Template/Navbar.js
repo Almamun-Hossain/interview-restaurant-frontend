@@ -11,26 +11,16 @@ import { useRouter } from "next/navigation";
 import UserNavlist from "../molecule/UserNavlist";
 import AdminNavlist from "../molecule/AdminNavlist";
 import Cookies from "js-cookie";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
-  let token = Cookies.get("token");
-  let { user, setUser } = useContext(UserContext);
+  let { data: session } = useSession();
   let { logout } = useAuth();
   const router = useRouter();
   const onLogout = async (e) => {
     e.preventDefault();
-    let data = await logout();
-    if (data?.success) {
-      router.push("/login");
-    }
-    toast("Successfully logged out!");
+    await logout();
   };
-
-  useEffect(() => {
-    if (!token) {
-      setUser(null);
-    }
-  }, [token]);
 
   return (
     <div className="bg-primary shadlow-lg w-full">
@@ -49,13 +39,17 @@ const Navbar = () => {
           {/* Menu items on the right */}
 
           <div className="flex items-center space-x-4">
-            {user?.isAdmin ? <AdminNavlist /> : <UserNavlist user={user} />}
+            {session?.user?.isAdmin ? (
+              <AdminNavlist />
+            ) : (
+              <UserNavlist user={session?.user} />
+            )}
 
-            {user ? (
+            {session?.user ? (
               <>
                 <div className="group relative">
                   <button className="text-white hover:text-secondary">
-                    {user?.name}
+                    {session?.user?.name}
                   </button>
                   <ul className="hidden z-50 group-hover:block absolute w-full">
                     <div className="bg-white text-gray-800 rounded shadow-lg mt-1 py-1">

@@ -6,18 +6,19 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const Login = () => {
+  let { data: session } = useSession();
   let { formData, submitLogin, onChange } = useAuthForm();
   let router = useRouter();
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (token) {
+    console.log(session);
+    if (session) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [session]);
 
   return (
     <GuestLayout>

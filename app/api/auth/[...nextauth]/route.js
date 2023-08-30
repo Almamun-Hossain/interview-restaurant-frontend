@@ -1,57 +1,52 @@
-const { default: NextAuth } = require("next-auth/next");
-import Axios from "@/app/_utils/Axios";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       id: "credentials",
       credentials: {
         email: {
           label: "Email",
           type: "email",
-          placeholder: "email@example.com",
+          name: "email",
+          placeholder: "example@mail.com",
         },
-        password: { label: "Password", type: "password" },
+        password: { label: "Password", type: "password", name: "password" },
       },
-      async authorize(credentials) {
-        try {
-          if (!credentials.email || !credentials.password)
-            throw new Error("Credentials are missing");
-          let { data } = await Axios.post("/user/login", credentials);
-
-          if (data) {
-            let tokenData = {
-              ...data.user,
-              token: data.token,
-            };
-            return tokenData;
-          }
-          return null;
-        } catch (error) {
-          throw new Error(error?.response?.data?.message);
+      async authorize(credentials, req) {
+        if (!credentials) {
+          throw new Error("No credentials.");
+        }
+        const res = await fetch("http://localhost:4000/api/v1/user/login", {
+          method: "POST",
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          return { ...data.user, accessToken: data.token };
+        } else {
+          console.log(data);
+          throw new Error(data.message);
         }
       },
     }),
   ],
 
-  pages: {
-    signIn: "/login",
-  },
-  session: {
-    jwt: true,
-  },
   callbacks: {
     jwt: async ({ token, user }) => {
       return { ...token, ...user };
     },
-    session: async ({ session, token }) => {
-      session.user = token;
+    session: async ({ token, session }) => {
+      session.user.id = token.id;
+      session.user.token = token.accessToken;
+      session.user.isAdmin = token.isAdmin;
       return session;
     },
-    redirect: () => {
-      return "/dashboard";
-    },
+  },
+  pages: {
+    signIn: "/login",
   },
 });
 

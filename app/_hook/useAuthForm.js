@@ -23,12 +23,12 @@ const useAuthForm = () => {
 
   const submitLogin = async (e) => {
     e.preventDefault();
-    let data = await login(formData);
-    if (data) {
-      toast("You have successfully logged in");
-      setFormData({ ...formData, email: "", password: "" });
-      router.back();
-    }
+    login(formData);
+    // if (data) {
+    //   toast("You have successfully logged in");
+    //   setFormData({ ...formData, email: "", password: "" });
+    //   router.back();
+    // }
   };
 
   const submitRegister = async (e) => {

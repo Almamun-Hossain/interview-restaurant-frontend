@@ -1,15 +1,19 @@
+"use client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { UserProvider } from "./UserProvider";
 import { SessionProvider } from "next-auth/react";
+import AppCookiesProvider from "./AppCookiesProvider";
 
 const Providers = ({ children }) => {
   const client = new QueryClient();
   return (
-    <QueryClientProvider client={client}>
-      <UserProvider>
-        <SessionProvider>{children}</SessionProvider>
-      </UserProvider>
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={client}>
+        <UserProvider>
+          <AppCookiesProvider>{children}</AppCookiesProvider>
+        </UserProvider>
+      </QueryClientProvider>
+    </SessionProvider>
   );
 };
 

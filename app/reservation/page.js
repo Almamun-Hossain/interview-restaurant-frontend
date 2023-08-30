@@ -17,7 +17,7 @@ const Order = () => {
 
   if (isLoading) return <Loading />;
 
-  const filteredReservations = data.filter((reservation) =>
+  const filteredReservations = data?.filter((reservation) =>
     reservation.restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const onCancel = async (e) => {

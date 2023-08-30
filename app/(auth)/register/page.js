@@ -1,20 +1,21 @@
 "use client";
 import useAuthForm from "@/app/_hook/useAuthForm";
 import GuestLayout from "@/app/_layout/GuestLayout";
-import Cookies from "js-cookie";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const Register = () => {
+  let { data: session } = useSession();
   let { formData, submitRegister, onChange } = useAuthForm();
   let router = useRouter();
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (token) {
+    console.log(session);
+    if (session) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [session]);
 
   return (
     <GuestLayout>

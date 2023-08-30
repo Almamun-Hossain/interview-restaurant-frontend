@@ -1,24 +1,17 @@
 "use client";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../_utils/UserProvider";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import useFetchQuery from "../_hook/useFetchQuery";
-import Cookies from "js-cookie";
+import { useSession } from "next-auth/react";
 
 const ProtectedRoute = ({ children }) => {
-  let { user, setUser } = useContext(UserContext);
+  const { data: session } = useSession();
   let router = useRouter();
-  let { data } = useFetchQuery("user-data", "user/me");
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (!token) {
+    if (!session) {
       router.push("/login");
     }
-    if (!user && data) {
-      setUser(data.user);
-    }
-  }, [user, data]);
+  }, [session]);
   return children;
 };
 
